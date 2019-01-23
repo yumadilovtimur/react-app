@@ -1,4 +1,6 @@
 import React from 'react';
+import CircularProgress from '@material-ui/core/CircularProgress';
+import './AuthForm.scss';
 
 class AuthForm extends React.Component {
   state = {
@@ -28,24 +30,45 @@ class AuthForm extends React.Component {
   };
 
   render() {
+    const { isFetching } = this.props;
+
+    if (isFetching) {
+      return <CircularProgress color="primary" size={60} thickness={3} />;
+    }
+
     return (
-      <form onSubmit={this.handleSubmit}>
-        <input
-          type="email"
-          name="username"
-          onChange={this.handleChange}
-          value={this.state.input.username}
-        />
-        <input
-          type="password"
-          name="password"
-          onChange={this.handleChange}
-          value={this.state.input.password}
-        />
-        <button type="submit" onClick={this.handleSubmit}>
-          Войти
-        </button>
-      </form>
+      <div className="container">
+        <div className="authform">
+          <form className="authform__htmlform" onSubmit={this.handleSubmit}>
+            <span className="authform__title">Войти</span>
+            <input
+              className="authform__input"
+              type="email"
+              name="username"
+              onChange={this.handleChange}
+              value={this.state.input.username}
+              required
+              placeholder="Имя пользователя"
+            />
+            <input
+              className="authform__input"
+              type="password"
+              name="password"
+              onChange={this.handleChange}
+              value={this.state.input.password}
+              required
+              placeholder="Пароль"
+            />
+            <button
+              className="authform__submit"
+              type="submit"
+              onClick={this.handleSubmit}
+            >
+              Войти
+            </button>
+          </form>
+        </div>
+      </div>
     );
   }
 }

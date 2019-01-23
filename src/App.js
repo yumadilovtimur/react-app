@@ -10,19 +10,23 @@ import { loginRequest, logout } from './actions/authorization';
 
 class App extends React.Component {
   render() {
-    const { isAuthorize } = this.props.authorization;
+    const { isAuthorize, isFetching } = this.props.authorization;
     const { loginRequest, logout } = this.props;
 
     return (
       <BrowserRouter>
-        <React.Fragment>
+        <div className="wrapper">
           <Header logout={logout} />
           <Switch>
             <Route
               exact
               path="/login"
               render={props => (
-                <AuthForm {...props} loginRequest={loginRequest} />
+                <AuthForm
+                  {...props}
+                  loginRequest={loginRequest}
+                  isFetching={isFetching}
+                />
               )}
             />
             <PrivateRoute
@@ -37,7 +41,7 @@ class App extends React.Component {
             />
             <Redirect to="/login" />
           </Switch>
-        </React.Fragment>
+        </div>
       </BrowserRouter>
     );
   }
