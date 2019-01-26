@@ -1,8 +1,15 @@
 import loginFlow from './authorization';
-import { call } from 'redux-saga/effects';
+import getAddressesFlow from './addresses';
+import getCoordinatesFlow from './order';
+import { call, takeEvery, all } from 'redux-saga/effects';
+import { ADDRESSES_REQUEST } from '../actions/addresses';
 
 function* rootSaga() {
-  yield call(loginFlow);
+  yield all([
+    call(loginFlow),
+    takeEvery(ADDRESSES_REQUEST, getAddressesFlow),
+    call(getCoordinatesFlow)
+  ]);
 }
 
 export default rootSaga;

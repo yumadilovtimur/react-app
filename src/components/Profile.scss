@@ -1,0 +1,132 @@
+@import "../variables.scss";
+.profile {
+  width: 100%;
+  min-height: 90vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.profile__htmlform {
+  width: 65vw;
+  min-height: 300px;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0px 3px 20px 5px rgba(0, 0, 0, 0.2);
+  background-color: #ffffff;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.profile__title {
+  font-family: "Roboto", sans-serif;
+  font-size: 36px;
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.8);
+  text-align: center;
+  line-height: 1;
+  margin-bottom: 20px;
+  flex-basis: 100%;
+}
+
+.profile__subtitle {
+  font-family: "Roboto", sans-serif;
+  font-size: 20px;
+  font-weight: 500;
+  color: rgba(0, 0, 0, 0.8);
+  line-height: 1;
+  margin-bottom: 20px;
+  flex-basis: 100%;
+}
+
+.profile__htmlform-item {
+  margin-bottom: 20px;
+  flex-basis: 47.5%;
+  margin-right: 5%;
+  &:nth-child(2n) {
+    margin-right: 0;
+  }
+}
+
+.profile__input {
+  box-sizing: border-box;
+  width: 100%;
+  height: 40px;
+  padding: 10px;
+  border: none;
+  border-bottom: 1.5px solid #a5a5a5;
+  transition-duration: 0.3s;
+  transition-property: all;
+  outline: none;
+  &:hover {
+    border-bottom: 1.5px solid #313131;
+  }
+  &:focus {
+    border-bottom: 1.5px solid #3f51b5;
+  }
+}
+
+.profile__input-error {
+  display: block;
+  font-weight: 400;
+  font-size: 14px;
+  color: red;
+  margin-top: 10px;
+}
+
+.profile__submit {
+  background-color: rgb(63, 81, 181);
+  border: none;
+  font-weight: 600;
+  align-self: flex-start;
+  margin: 0;
+  padding: 12px 15px;
+  display: inline;
+  text-transform: uppercase;
+  border-radius: 3px;
+  color: #ffffff;
+  transition-duration: 0.3s;
+  transition-property: all;
+  &:hover {
+    background-color: rgb(52, 66, 145);
+  }
+}
+
+.profile__error-window {
+  width: 45vw;
+  min-height: 130px;
+  padding: 40px 20px;
+  border-radius: 5px;
+  box-shadow: 0px 3px 20px 5px rgba(0, 0, 0, 0.2);
+  background-color: #ffffff;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.profile__text {
+  font-size: 16px;
+  margin-bottom: 20px;
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.8);
+}
+
+.profile__link {
+  background-color: transparent;
+  text-decoration: none;
+  font-weight: 600;
+  align-self: flex-start;
+  margin: 0;
+  padding: 8px 15px;
+  display: inline;
+  text-transform: uppercase;
+  border-radius: 3px;
+  border: 1px solid rgba(63, 81, 181, 0.5);
+  color: rgb(63, 81, 181);
+  transition-duration: 0.3s;
+  transition-property: all;
+  &:hover {
+    border: 1px solid rgba(63, 81, 181, 1);
+  }
+}

@@ -3,8 +3,12 @@ import { NavLink } from 'react-router-dom';
 import './Header.scss';
 
 class Header extends React.Component {
-  render() {
+  handleClick = () => {
     const { logout } = this.props;
+    logout();
+  };
+  render() {
+    const { isAuthorize } = this.props;
     return (
       <div className="container container--with-shadow">
         <header className="header">
@@ -24,7 +28,19 @@ class Header extends React.Component {
             >
               Профиль
             </NavLink>
-            <button className="header__link">Выйти</button>
+            {isAuthorize ? (
+              <button className="header__link" onClick={this.handleClick}>
+                Выйти
+              </button>
+            ) : (
+              <NavLink
+                className="header__link"
+                activeClassName="header__link--active"
+                to="/login"
+              >
+                Войти
+              </NavLink>
+            )}
           </nav>
         </header>
       </div>

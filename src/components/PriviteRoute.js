@@ -7,9 +7,12 @@ class PrivateRoute extends React.Component {
     const { component: RouteComponent, ...rest } = this.props;
     return (
       <Route
-        {...rest}
         render={props =>
-          isAuthorize ? <RouteComponent {...props} /> : <Redirect to="/" />
+          isAuthorize ? (
+            <RouteComponent {...props} {...rest} />
+          ) : (
+            <Redirect to="/" />
+          )
         }
       />
     );

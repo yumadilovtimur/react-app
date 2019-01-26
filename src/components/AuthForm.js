@@ -19,6 +19,11 @@ class AuthForm extends React.Component {
       input: {
         ...this.state.input,
         [event.target.name]: event.target.value
+      },
+      error: {
+        ...this.state.error,
+        username: null,
+        password: null
       }
     });
   };
@@ -26,14 +31,27 @@ class AuthForm extends React.Component {
   handleSubmit = event => {
     event.preventDefault();
     const { loginRequest } = this.props;
-    loginRequest(this.state.input.username, this.state.input.password);
+    if (this.state.input.password.length >= 6) {
+      loginRequest(this.state.input.username, this.state.input.password);
+    } else {
+      this.setState({
+        error: {
+          ...this.state.error,
+          password: 'Пароль должен содержать не менее 6 символов'
+        }
+      });
+    }
   };
 
   render() {
-    const { isFetching } = this.props;
+    const { isFetching, error } = this.props;
 
     if (isFetching) {
-      return <CircularProgress color="primary" size={60} thickness={3} />;
+      return (
+        <div className="authform">
+          <CircularProgress color="primary" size={60} thickness={3} />
+        </div>
+      );
     }
 
     return (
@@ -50,6 +68,11 @@ class AuthForm extends React.Component {
               required
               placeholder="Имя пользователя"
             />
+            {this.state.error.username ? (
+              <div className="authform__input-error">
+                {this.state.error.username}
+              </div>
+            ) : null}
             <input
               className="authform__input"
               type="password"
@@ -59,6 +82,11 @@ class AuthForm extends React.Component {
               required
               placeholder="Пароль"
             />
+            {this.state.error.password ? (
+              <div className="authform__input-error">
+                {this.state.error.password}
+              </div>
+            ) : null}
             <button
               className="authform__submit"
               type="submit"
@@ -66,6 +94,9 @@ class AuthForm extends React.Component {
             >
               Войти
             </button>
+            {error !== null ? (
+              <div className="authform__error">{error}</div>
+            ) : null}
           </form>
         </div>
       </div>

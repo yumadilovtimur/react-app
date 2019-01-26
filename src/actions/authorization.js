@@ -12,9 +12,8 @@ export const loginRequest = (username, password) => ({
   }
 });
 
-export const loginSuccess = payload => ({
-  type: LOGIN_SUCCESS,
-  payload
+export const loginSuccess = () => ({
+  type: LOGIN_SUCCESS
 });
 
 export const loginError = payload => ({

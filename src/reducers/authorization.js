@@ -5,8 +5,23 @@ import {
   LOGOUT
 } from '../actions/authorization';
 
+const token = localStorage.getItem('token');
+
+const getToken = () => {
+  switch (token) {
+    case null:
+      return false;
+    case 'true':
+      return true;
+    case 'false':
+      return false;
+    default:
+      return false;
+  }
+};
+
 const initialState = {
-  isAuthorize: false,
+  isAuthorize: getToken(),
   error: null,
   isFetching: false,
   isFetched: false
@@ -23,8 +38,10 @@ const authorization = (state = initialState, action) => {
     case LOGIN_SUCCESS:
       return {
         ...state,
+        isAuthorize: true,
         isFetched: true,
-        isFetching: false
+        isFetching: false,
+        error: null
       };
     case LOGIN_ERROR:
       return {
@@ -34,6 +51,7 @@ const authorization = (state = initialState, action) => {
         error: action.payload
       };
     case LOGOUT:
+      localStorage.setItem('token', false);
       return {
         ...state,
         isAuthorize: false

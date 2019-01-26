@@ -11,8 +11,7 @@ function fetchLogin(username, password) {
   return fetch(
     `https://loft-taxi.glitch.me/auth?username=${username}&password=${password}`,
     {
-      method: 'GET',
-      mode: 'no-cors'
+      method: 'GET'
     }
   )
     .then(response => response.json())
@@ -20,11 +19,19 @@ function fetchLogin(username, password) {
     .catch(error => ({ error }));
 }
 
+const setToken = token => {
+  localStorage.setItem('token', token);
+};
+
 function* authorize(username, password) {
   try {
     const token = yield call(fetchLogin, username, password);
-    yield put(loginSuccess(token));
-    // yield call(Api.storeItem, { token });
+    if (token.response.success) {
+      yield put(loginSuccess());
+      yield call(setToken, token.response.success);
+    } else {
+      yield put(loginError(token.response.error));
+    }
   } catch (error) {
     yield put(loginError(error));
   }
@@ -39,7 +46,6 @@ export default function* loginFlow() {
     const action = yield take([LOGOUT, LOGIN_ERROR]);
     if (action.type === LOGOUT) {
       yield cancel(task);
-      // yield call(Api.clearItem, 'token');
     }
   }
 }
